@@ -1,4 +1,4 @@
-# 乙級檢定練習 — 上下文 (更新: 2026-06-11)
+# 乙級檢定練習 — 上下文 (更新: 2026-06-14)
 
 ## 給明天的指令（直接複製貼給 Claude）
 > 讀這個資料夾的 CLAUDE.md，繼續昨天的 PHP 乙級備考進度。
@@ -60,9 +60,14 @@ switch($do){
 | `empty()` | PHP 內建 | 判斷是否為空 |
 | `switch/case/break` | PHP 內建 | 多重條件 |
 | `include` | PHP 內建 | 嵌入另一個檔案 |
-| `$do` | **老師自己取的** | 存「目前要顯示哪頁」 |
-| `"main"/"login"/"news"` | **老師自己定的** | 頁面代號 |
-| `"front/login.php"` | **老師自己定的** | 資料夾和檔名 |
+| `$do` | **老師取的** | 存「目前要顯示哪頁」 |
+| `"main"/"login"/"news"` | **素材本身定義的** | 連結中 `?do=` 的值 |
+| `"front/login.php"` | **老師取的** | 資料夾和檔名對應 |
+
+**釐清規則：**
+- `?do=xxx` 的 key 名稱 `do` → **素材**（乙級考題 HTML 裡本來就有）
+- `$_GET['do']` 去接它 → **老師**的解法（配合素材）
+- `$_GET` 本身 → **PHP 內建**
 
 ### Commit 3 版本（動態 include，尚未學到）
 ```php
@@ -76,10 +81,17 @@ if(file_exists($file)){
 ```
 **下次繼續**：要讓用戶先思考 switch 版本和這個版本新增頁面時的差異。
 
-## 下次繼續的起點
-- 四個頁面的 include 已全部完成（main / login / news / 第四頁）
-- `front/news.php` 已把原本在外面的 `.sswww` hover JS 移進去
-- 下一步：開始串資料庫，動態產生內容（消息列表、選單等）
+## 下次繼續的起點（更新: 2026-06-14）
+- ✅ Commit 1：`index.php` 已寫死 `include "front/main.php"`
+- ⬜ Commit 2：switch/case 路由（今天理解概念，尚未實作）
+- ⬜ Commit 3：動態 include + file_exists
+- ⬜ 串資料庫，動態產生內容
+
+**四個頁面說明：**
+- `front/main.php`, `front/login.php`, `front/news.php` ← 前台 include 片段
+- `back/admin.php` ← 後台（獨立，不走前台 switch）
+
+**下次從這裡開始：** 實作 index.php 的 switch/case（Commit 2）
 
 ## 用戶偏好（重要）
 - **不喜歡猜測性回答** — 不確定的事不要說，說錯了他會很直接表達不滿
