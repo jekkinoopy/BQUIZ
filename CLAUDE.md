@@ -1,58 +1,44 @@
-# 乙級檢定練習 — 上下文 (更新: 2026-06-14)
+# 乙級檢定練習 — 上下文 (更新: 2026-06-16)
 
 ## 給明天的指令（直接複製貼給 Claude）
 > 讀這個資料夾的 CLAUDE.md，繼續昨天的 PHP 乙級備考進度。
 
 ## 現在在做什麼
 PHP 乙級檢定考試備考。正在從老師的示範專案學習，理解架構思路後自己重建。
+老師專案路徑：`D:\Developer\projects\FallDevCourse\11501-BQUIZ01`
+練習專案路徑：`D:\Developer\projects\FallDevCourse\BQUIZ\Q1-pra01`
 
 ## 資料夾結構
 ```
 BQUIZ/
-├── Q1-pra01/          ← 第一題第一次練習（今天從暫存資料夾複製過來）
-│   ├── index.php      ← 前台主頁（目前還在整理，是從瀏覽器存下來的版型）
-│   ├── admin.php      ← 後台
-│   ├── login.php
-│   ├── news.php
-│   ├── front/         ← include 的子頁面放這裡
+├── Q1-pra01/
+│   ├── index.php      ← 前台主頁（已完成 Commit 2）
+│   ├── front/         ← include 的子頁面：login.php, main.php, news.php
+│   ├── back/          ← 後台（獨立，不走前台 switch）
 │   ├── css/, js/, icon/, 資料/
-└── 練習時間記錄.md     ← 各題組練習時間記錄表（今天建立）
+└── 練習時間記錄.md
 ```
-
-## 今天卡住的問題
-
-### HTML 版型結構問題
-`Q1-pra01/index.php` 目前是從瀏覽器存下來的靜態 HTML，**縮排完全混亂**，
-找不到 `<div class="di">` 對應的 `</div>` 關閉位置。
-
-- 這個 div 是**中間內容區**（`width:53.2%`），要把它整段換成 `<?php include "front/main.php"; ?>`
-- 它的結束位置在 `<div id="alt"` 的**正上方那一行**
-
-### VSCode 的 PHP 標籤配對
-考場電腦是否有設定 `"files.associations": {"*.php": "html"}` 不確定，
-需要問老師。設定了之後點 `<div` 標籤就能反白對應的 `</div>`。
-
-**注意：** `Ctrl+Shift+\` 對 HTML 標籤**沒用**，那是跳括號 `{}` 的快捷鍵。
 
 ## 老師的架構思路（已學到）
 
 老師的目標：用一個 `index.php` 搞定所有前台頁面，避免頁首/選單重複寫四次。
 
-### Commit 1 版本（硬寫死）
+### Commit 1 版本（硬寫死）✅
 ```php
-<?php include "front/login.php"; ?>
+<?php include "front/main.php"; ?>
 ```
 
-### Commit 2 版本（switch 判斷）
+### Commit 2 版本（switch 判斷）✅ 已完成
 ```php
 $do = (!empty($_GET['do'])) ? $_GET['do'] : "main";
 switch($do){
-    case "login":  include "front/login.php";  break;
-    case "main":   include "front/main.php";   break;
-    case "news":   include "front/news.php";   break;
-    default:       include "front/main.php";
+    case "admin": include "front/login.php"; break;
+    case "main":  include "front/main.php";  break;
+    case "news":  include "front/news.php";  break;
+    default:      include "front/main.php";
 }
 ```
+注意：用戶的素材按鈕是 `?do=admin`，所以 case 是 `"admin"` 而非 `"login"`。
 
 | 程式碼 | 誰定義的 | 意思 |
 |--------|---------|------|
@@ -71,7 +57,7 @@ switch($do){
 - `$_GET['do']` 去接它 → **老師**的解法（配合素材）
 - `$_GET` 本身 → **PHP 內建**
 
-### Commit 3 版本（動態 include，尚未學到）
+### Commit 3 版本（動態 include）⬜ 進行中
 ```php
 $do = $_GET['do'] ?? "main";
 $file = "front/$do.php";
@@ -81,53 +67,43 @@ if(file_exists($file)){
     include "front/main.php";
 }
 ```
-**下次繼續**：要讓用戶先思考 switch 版本和這個版本新增頁面時的差異。
 
-## 下次繼續的起點（更新: 2026-06-14）
-- ✅ Commit 1：`index.php` 已寫死 `include "front/main.php"`
-- ⬜ Commit 2：switch/case 路由（今天理解概念，尚未實作）
-- ⬜ Commit 3：動態 include + file_exists
+## 下次繼續的起點（更新: 2026-06-16）
+- ✅ Commit 1：硬寫死 `include "front/main.php"`
+- ✅ Commit 2：switch/case 路由
+- ⬜ Commit 3：動態 include + file_exists（**現在在這裡**，觀念已講，尚未實作）
 - ⬜ 串資料庫，動態產生內容
 
-**四個頁面說明：**
-- `front/main.php`, `front/login.php`, `front/news.php` ← 前台 include 片段
-- `back/admin.php` ← 後台（獨立，不走前台 switch）
+**下次從這裡開始：** Commit 3 的三個新語法都講解完畢後，讓用戶自己動手改 index.php。
 
-**下次從這裡開始：** 實作 index.php 的 switch/case（Commit 2）
+## 用戶偏好與教學規範（重要）
 
-## 用戶偏好（重要）
-- **不喜歡猜測性回答** — 不確定的事不要說，說錯了他會很直接表達不滿
-- **要先講老師的思路再引導** — 不要直接給答案，要帶著他理解為什麼
-- **要區分「老師自己取名的」vs「PHP 內建的」** — 他明確要求這樣
-- **不要跑太快** — 他還沒做完 commit 1 就不要講 commit 3
-- **簡短直接** — 不要囉嗦
-
-## 助教模式強制規範（初學者備考專用）
-
-### 嚴禁直接給答案或叫他複製貼上
-用戶正在備考乙級檢定，考場不能帶小抄，必須學會思考與手寫。
-絕對不准說「把這段刪掉換成這段」或「直接複製這段」。
-進入下一個進度前，**必須先說清楚：原本的寫法有什麼問題？新寫法解決了什麼？**
-
-### 引導式教學三步驟
-1. **原理說明**：用白話解釋新語法，說清楚每個東西是素材的、老師取的、還是PHP內建的
-2. **出題考他**：讓他自己講出或寫出關鍵邏輯，不要急著讓他動手改code
-3. **檢查提示**：他貼上code後，指出對不對，但不要直接幫他重寫
-
-### 新語法要打包講，不准零散丟
-相關聯的語法（例如 `??`、`$file`、`file_exists`）要作為一個完整邏輯主題一次講清楚，包含：完整格式、是什麼的縮寫、為什麼需要它。
+- **不喜歡猜測性回答** — 不確定的事不要說
+- **簡短直接** — 不要囉嗦，但要完整，不能零散
+- **要區分「素材」vs「老師取的」vs「PHP 內建的」** — 每次提到語法都要明確
+- **嚴禁直接給答案或叫他複製貼上** — 用戶在備考，考場要自己寫，必須學會思考
+- **進入新進度前必須先說清楚**：原本寫法有什麼問題、新寫法解決什麼
+- **新語法要打包講完整**：相關聯的語法（如 `??`、`$file`、`file_exists`）要一次作為完整邏輯主題講清楚，包含格式、是什麼縮寫、為什麼需要它
+- **引導步驟**：① 原理說明 → ② 出題讓他自己講邏輯 → ③ 他寫完再檢查，不幫他重寫
+- **不要跑太快** — 當前 commit 沒做完不談下一個
 
 ## Claude 自己的犯錯記錄（勿犯）
 
+### 2026-06-16：更新 CLAUDE.md 沒有先整合，直接貼在最下面
+更新規範前必須先讀完整份檔案，把新規範融合進既有結構，並同步更新進度，不能只是 append。
+
 ### 2026-06-16：使用者給了檔名卻叫他貼內容
-使用者提到檔名就等於已經給了，直接用 Read 工具自己去讀，不准叫使用者貼。
+使用者提到檔名就等於已經給了，直接用 Read 工具自己去讀。
+
+### 2026-06-16：教法零散，一次只丟一個片段
+Commit 3 的 `??`、`$file`、`file_exists` 被拆成好幾次才講完，讓用戶覺得資訊混亂。應該打包成一個完整邏輯主題一次講清楚。
+
+### 2026-06-16：直接給答案叫用戶複製貼上
+說「把這段刪掉換成這段」，完全失去備考意義。必須引導思路，讓用戶自己寫。
 
 ### 2026-06-15：改檔後沒有主動附 commit 指令
-違反 git-commit-required.md 的強制規範，等使用者開口才給。
-**下次規則：** 只要有改任何檔案，回覆結尾必須主動附 commit 指令，不准等人開口。
+**規則：** 只要有改任何檔案，回覆結尾必須主動附 commit 指令，不准等人開口。
 
 ### 2026-06-15：沒有確實套用「釐清規則」
-說明 `$do` 時只說「老師取的變數名」，漏掉了 `do` 這個 key 本身來自**素材**的重要區分。
-CLAUDE.md 裡明明有完整的釐清表，但產生回答時沒有當作強制規範執行，只是掃過去。
-
-**下次規則：** 被問到哪個就講哪個的來源，不要主動把三個都拉進來一起說。
+說明 `$do` 時漏掉 `do` 這個 key 來自**素材**的區分。
+**規則：** 被問到哪個就講哪個的來源，不要主動把三個都拉進來。
