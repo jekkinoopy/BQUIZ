@@ -68,7 +68,19 @@
                     </div>
         		</div>
 <!--  -->
-				<?php include "back/admin.php" ?>
+				<?php 
+				//法一 寫死的方法 
+				// include "back/admin.php" 
+
+				//法二 改成動態include
+			    $do=$_GET['do']??"title";
+				$path= "back/$do.php";
+				if(file_exists($path)){
+					include $path;
+				}else{
+					include "back/admin.php";
+				}
+				?> 
                 <div id="alt" style="position: absolute; width: 350px; min-height: 100px; word-break:break-all; text-align:justify;  background-color: rgb(255, 255, 204); top: 50px; left: 400px; z-index: 99; display: none; padding: 5px; border: 3px double rgb(255, 153, 0); background-position: initial initial; background-repeat: initial initial;"></div>
                     	<script>
 						$(".sswww").hover(

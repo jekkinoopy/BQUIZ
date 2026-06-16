@@ -57,6 +57,16 @@ switch($do){
 - `$_GET['do']` 去接它 → **老師**的解法（配合素材）
 - `$_GET` 本身 → **PHP 內建**
 
+### back/title.php 的來源釐清
+素材的 `admin.php` 原本是一整頁，中間的內容區塊就是「標題管理」的表單。
+老師把這個內容區塊抽出來存成 `back/title.php`，讓 `admin.php` 外殼透過動態 include 載入它。
+
+這跟前台的做法完全一樣：
+- 前台：把素材各頁面的內容區塊抽成 `front/main.php`、`front/login.php`、`front/news.php`
+- 後台：把素材 `admin.php` 的內容區塊抽成 `back/title.php`
+
+所以 `"title"` 是老師自己取的預設頁名稱，對應他建立的 `back/title.php`。
+
 ### Commit 3 版本（動態 include）⬜ 進行中
 ```php
 $do = $_GET['do'] ?? "main";
@@ -70,11 +80,14 @@ if(file_exists($file)){
 
 ## 下次繼續的起點（更新: 2026-06-16）
 - ✅ Commit 1：硬寫死 `include "front/main.php"`
-- ✅ Commit 2：switch/case 路由
-- ⬜ Commit 3：動態 include + file_exists（**現在在這裡**，觀念已講，尚未實作）
+- ✅ Commit 2：switch/case 路由（index.php）
+- ✅ Commit 3：動態 include（index.php 完成）
+- ⬜ Commit 3：動態 include（**admin.php 有 bug，下次從這裡開始**）
+  - `$do=$_GET['do']` 少了 `?? "title"`
+  - `file_exsits` 拼字錯誤，應為 `file_exists`
+  - else 裡應為 `"back/title.php"`，不是 `"back/admin.php"`
+  - `"title"` 是老師定義的預設頁，對應 `back/title.php`（後台預設顯示標題管理，之後會建立）
 - ⬜ 串資料庫，動態產生內容
-
-**下次從這裡開始：** Commit 3 的三個新語法都講解完畢後，讓用戶自己動手改 index.php。
 
 ## 用戶偏好與教學規範（重要）
 
@@ -86,11 +99,15 @@ if(file_exists($file)){
 - **新語法要打包講完整**：相關聯的語法（如 `??`、`$file`、`file_exists`）要一次作為完整邏輯主題講清楚，包含格式、是什麼縮寫、為什麼需要它
 - **引導步驟**：① 原理說明 → ② 出題讓他自己講邏輯 → ③ 他寫完再檢查，不幫他重寫
 - **不要跑太快** — 當前 commit 沒做完不談下一個
+- **指出錯誤前必須先解釋新出現的值從哪來** — 程式碼裡出現用戶沒看過的值（例如 `"title"`），必須先說清楚它是什麼、誰定義的、為什麼是這個值，才能說用戶哪裡錯。不能直接說「應該是 `"title"`」而不解釋它是什麼。
 
 ## Claude 自己的犯錯記錄（勿犯）
 
 ### 2026-06-16：更新 CLAUDE.md 沒有先整合，直接貼在最下面
 更新規範前必須先讀完整份檔案，把新規範融合進既有結構，並同步更新進度，不能只是 append。
+
+### 2026-06-16：用戶說「你自己不會去看嗎」還是沒主動讀
+用戶說要看檔案、或說「你去看」、或說「我更新了」，就必須立刻用 Read 工具去讀，不准叫用戶做任何事。
 
 ### 2026-06-16：使用者給了檔名卻叫他貼內容
 使用者提到檔名就等於已經給了，直接用 Read 工具自己去讀。
