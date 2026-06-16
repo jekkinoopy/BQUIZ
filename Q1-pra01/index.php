@@ -31,34 +31,44 @@
         		</div>
 <!--  -->
 				<?php
-				$do=(!empty($_GET['do']))?$_GET['do']:"main";
-					//if/else縮寫 條件?成立的話:不成立的話
-					//將下方switch的$_GET['do']改為$do
-					
-					// include "front/main.php" 
-					// 這是寫死main 但應該要點什麼出現什麼區塊:判斷式 兩個以上用switch case
-					switch($do){
-						//如果$_GET網址?的key是
-						case "admin":
-							include "front/login.php";
-							break;
-						case "main":
-							include "front/main.php";
-							break;
-						case "news":
-							include "front/news.php";
-							break;
-							//若只有這三個 網址沒有key=do 或value為亂碼 畫面會壞掉
-							//加上預設值
-						default:
-							include "front/main.php";
-							//只有預設值的話 只能解決value為亂碼 回到最上方加上解決沒有GET			
-									}
-					
+	// switch case寫法
+				//$do=(!empty($_GET['do']))?$_GET['do']:"main";
+				//if/else縮寫 條件?成立的話:不成立的話
+				//將下方switch的$_GET['do']改為$do
 				
-				?>
+				// include "front/main.php" 
+				// 這是寫死main 但應該要點什麼出現什麼區塊:判斷式 兩個以上用switch case
+				//switch($do){
+					//如果$_GET網址?的key是
+					// case "admin":
+						// 	include "front/login.php";
+						// 	break;
+						// case "main":
+							// 	include "front/main.php";
+							// 	break;
+							// case "news":
+								// 	include "front/news.php";
+								// 	break;
+								// 	//若只有這三個 網址沒有key=do 或value為亂碼 畫面會壞掉
+								//加上預設值
+								// default:
+								// 	include "front/main.php";
+								//只有預設值的話 只能解決value為亂碼 回到最上方加上解決沒有GET			
+								// }
+				
+	//動態 include，不管幾個頁面都不用動 switch
+		//$do=(!empty($_GET['do']))?$_GET['do']:"main";
+		// !empty不是空白=isset -> 
+		// 		if(isset($_GET['do'])){
+		//      $do = $_GET['do'];
+		// 		}else{$do = "main";}
+		
+		//  ->縮寫成	變數 = 值A ?? 值B;  (值A 存在且不為 null → 用值A 否則 → 用值B)
+		$do=$_GET['do']??"main";
+
+								?>
                 <div id="alt" style="position: absolute; width: 350px; min-height: 100px; word-break:break-all; text-align:justify;  background-color: rgb(255, 255, 204); top: 50px; left: 400px; z-index: 99; display: none; padding: 5px; border: 3px double rgb(255, 153, 0); background-position: initial initial; background-repeat: initial initial;"></div>
-                    	<script>
+				<script>
 						$(".sswww").hover(
 							function ()
 							{
