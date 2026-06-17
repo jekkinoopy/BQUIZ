@@ -89,7 +89,7 @@ if(file_exists($path)){
 - 預設值從 `"main"` 換成 `"title"`
 
 ```php
-$do = $_GET['do'] ?? "title";
+$do = $_GET['do'] ?? "title";  //  IS$_GET['do'] ? $_GET['do'] : "title"; 
 $path = "back/$do.php";
 if(file_exists($path)){
     include $path;
