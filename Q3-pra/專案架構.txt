@@ -1,0 +1,71 @@
+﻿列出資料夾 PATH
+磁碟區序號為 5402-1CF2
+D:.
+|   admin.php
+|   db19.sql
+|   index.php
+|   專案架構.txt
+|   
++---102202
+|   |   02A01.txt
+|   |   02A02.txt
+|   |   02A03.txt
+|   |   02A04.txt
+|   |   02A05.txt
+|   |   02A06.txt
+|   |   02A07.txt
+|   |   02A08.txt
+|   |   02B01.jpg
+|   |   02B02.jpg
+|   |   02B03.jpg
+|   |   02B04.png
+|   |   
+|   \---版型檔案
+|           02P01.htm
+|           
++---api
+|       add_que.php
+|       chk_acc.php
+|       chk_pw.php
+|       db.php
+|       edit_acc.php
+|       edit_news.php
+|       forgot.php
+|       get_post.php
+|       get_posts.php
+|       good.php
+|       logout.php
+|       reg.php
+|       vote.php
+|       
++---back
+|       acc.php
+|       main.php
+|       news.php
+|       que.php
+|       
++---css
+|       css.css
+|       
++---front
+|       forgot.php
+|       login.php
+|       main.php
+|       news.php
+|       po.php
+|       pop.php
+|       que.php
+|       reg.php
+|       result.php
+|       vote.php
+|       
++---icon
+|       02B01.jpg
+|       02B02.jpg
+|       02B03.jpg
+|       02B04.png
+|       
+\---js
+        jquery-1.9.1.min.js
+        js.js
+        

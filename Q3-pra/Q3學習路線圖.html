@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>102202 → 102203 術科學習路線圖</title>
+<style>
+  :root{
+    --bg:#f2f1ec;
+    --surface:#ffffff;
+    --surface-2:#eae8e0;
+    --ink:#21242b;
+    --ink-dim:#5b6270;
+    --line:#dcd9cf;
+    --accent:#c9822a;
+    --accent-ink:#8a5a16;
+    --accent-soft:#f3e2c8;
+    --skip:#9aa0ac;
+    --skip-soft:#eceeef;
+    --ref:#4c6fa8;
+    --ref-soft:#e3eaf5;
+    --code-bg:#ebe8de;
+  }
+  :root[data-theme="dark"]{
+    --bg:#1b1d22;
+    --surface:#24262d;
+    --surface-2:#2b2e36;
+    --ink:#eeeeec;
+    --ink-dim:#a7acb8;
+    --line:#3a3d46;
+    --accent:#e3a75b;
+    --accent-ink:#f3d19f;
+    --accent-soft:#3a2e1a;
+    --skip:#7d8493;
+    --skip-soft:#2c2f37;
+    --ref:#84a4de;
+    --ref-soft:#20293a;
+    --code-bg:#2a2c33;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#1b1d22;
+      --surface:#24262d;
+      --surface-2:#2b2e36;
+      --ink:#eeeeec;
+      --ink-dim:#a7acb8;
+      --line:#3a3d46;
+      --accent:#e3a75b;
+      --accent-ink:#f3d19f;
+      --accent-soft:#3a2e1a;
+      --skip:#7d8493;
+      --skip-soft:#2c2f37;
+      --ref:#84a4de;
+      --ref-soft:#20293a;
+      --code-bg:#2a2c33;
+    }
+  }
+
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei","Segoe UI",sans-serif;
+    line-height:1.8;
+    -webkit-font-smoothing:antialiased;
+  }
+  .mono{
+    font-family:ui-monospace,SFMono-Regular,"Noto Sans Mono",Menlo,Consolas,monospace;
+    font-variant-numeric:tabular-nums;
+  }
+  .page{
+    max-width:840px;
+    margin:0 auto;
+    padding:56px 28px 96px;
+  }
+  header.hero{
+    border-bottom:1px solid var(--line);
+    padding-bottom:28px;
+    margin-bottom:36px;
+  }
+  .eyebrow{
+    font-family:ui-monospace,SFMono-Regular,"Noto Sans Mono",Menlo,Consolas,monospace;
+    font-size:12.5px;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    color:var(--accent-ink);
+    margin:0 0 14px;
+  }
+  h1{
+    font-size:clamp(26px,4vw,34px);
+    line-height:1.35;
+    margin:0 0 12px;
+    text-wrap:balance;
+    letter-spacing:-.01em;
+  }
+  .lede{
+    color:var(--ink-dim);
+    font-size:16px;
+    max-width:62ch;
+    margin:0;
+  }
+  section{margin:52px 0;}
+  section:first-of-type{margin-top:0;}
+  .sec-head{
+    display:flex;
+    align-items:baseline;
+    gap:10px;
+    margin-bottom:16px;
+  }
+  .sec-num{
+    font-family:ui-monospace,SFMono-Regular,"Noto Sans Mono",Menlo,Consolas,monospace;
+    font-size:13px;
+    color:var(--accent-ink);
+    background:var(--accent-soft);
+    border-radius:4px;
+    padding:2px 7px;
+    letter-spacing:.02em;
+  }
+  h2{
+    font-size:20px;
+    margin:0;
+    letter-spacing:-.005em;
+  }
+  p{margin:0 0 14px;}
+  .card{
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:20px 22px;
+  }
+
+  /* legend */
+  .legend{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px 18px;
+    font-size:14px;
+    color:var(--ink-dim);
+  }
+  .legend .chip{margin-right:6px;}
+
+  .chip{
+    display:inline-flex;
+    align-items:center;
+    gap:5px;
+    font-size:12.5px;
+    font-weight:600;
+    padding:2px 9px;
+    border-radius:999px;
+    white-space:nowrap;
+    print-color-adjust:exact;
+    -webkit-print-color-adjust:exact;
+  }
+  .chip-new{background:var(--accent-soft);color:var(--accent-ink);}
+  .chip-skip{background:var(--skip-soft);color:var(--ink-dim);}
+  .chip-ref{background:var(--ref-soft);color:var(--ref);}
+
+  /* phase timeline */
+  .phase{
+    display:grid;
+    grid-template-columns:96px 1fr;
+    gap:4px 20px;
+    padding:18px 0;
+    border-top:1px solid var(--line);
+  }
+  .phase:last-child{border-bottom:1px solid var(--line);}
+  .phase-tag{
+    font-family:ui-monospace,SFMono-Regular,"Noto Sans Mono",Menlo,Consolas,monospace;
+    font-size:12px;
+    color:var(--ink-dim);
+    padding-top:2px;
+  }
+  .phase-tag b{
+    display:block;
+    color:var(--accent-ink);
+    font-size:15px;
+    margin-bottom:2px;
+  }
+  .phase-title{
+    font-weight:700;
+    margin:0 0 6px;
+    font-size:16px;
+  }
+  .phase-body{color:var(--ink-dim);font-size:14.5px;margin:0;}
+  .phase-body b{color:var(--ink);font-weight:600;}
+
+  /* tables */
+  .table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:8px;}
+  table{
+    border-collapse:collapse;
+    width:100%;
+    min-width:640px;
+    font-size:14px;
+    background:var(--surface);
+  }
+  th,td{
+    text-align:left;
+    padding:10px 14px;
+    border-bottom:1px solid var(--line);
+    vertical-align:top;
+  }
+  thead th{
+    background:var(--surface-2);
+    font-size:12.5px;
+    letter-spacing:.03em;
+    text-transform:uppercase;
+    color:var(--ink-dim);
+    font-family:ui-monospace,SFMono-Regular,"Noto Sans Mono",Menlo,Consolas,monospace;
+    font-weight:600;
+    position:sticky;
+    top:0;
+  }
+  tbody tr:last-child td{border-bottom:none;}
+  code.path{
+    font-family:ui-monospace,SFMono-Regular,"Noto Sans Mono",Menlo,Consolas,monospace;
+    background:var(--code-bg);
+    padding:1px 6px;
+    border-radius:4px;
+    font-size:12.5px;
+    white-space:nowrap;
+  }
+
+  /* outline list for the exam booklet walkthrough */
+  ol.outline{
+    list-style:none;
+    margin:0;
+    padding:0;
+    counter-reset:step;
+  }
+  ol.outline li{
+    counter-increment:step;
+    position:relative;
+    padding:16px 0 16px 46px;
+    border-top:1px solid var(--line);
+  }
+  ol.outline li:last-child{border-bottom:1px solid var(--line);}
+  ol.outline li::before{
+    content:counter(step);
+    position:absolute;
+    left:0;
+    top:16px;
+    width:28px;
+    height:28px;
+    border-radius:50%;
+    background:var(--surface-2);
+    color:var(--ink-dim);
+    font-family:ui-monospace,SFMono-Regular,"Noto Sans Mono",Menlo,Consolas,monospace;
+    font-size:13px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  .outline-head{
+    display:flex;
+    flex-wrap:wrap;
+    align-items:center;
+    gap:8px 10px;
+    margin-bottom:6px;
+  }
+  .outline-title{font-weight:700;font-size:15.5px;}
+  .outline-page{
+    font-family:ui-monospace,SFMono-Regular,"Noto Sans Mono",Menlo,Consolas,monospace;
+    font-size:12px;
+    color:var(--ink-dim);
+  }
+  .outline-body{margin:0;color:var(--ink-dim);font-size:14.5px;}
+  .outline-body b{color:var(--ink);font-weight:600;}
+
+  /* tiers */
+  .tier{
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:18px 20px;
+    margin-bottom:14px;
+    background:var(--surface);
+  }
+  .tier h3{
+    margin:0 0 8px;
+    font-size:15.5px;
+    display:flex;
+    align-items:center;
+    gap:8px;
+  }
+  .tier p{margin:0;font-size:14.5px;color:var(--ink-dim);}
+  .tier ul{margin:8px 0 0;padding-left:20px;font-size:14.5px;color:var(--ink-dim);}
+  .tier ul li{margin-bottom:4px;}
+  .tier ul li b{color:var(--ink);}
+
+  .callout{
+    border-left:3px solid var(--accent);
+    background:var(--accent-soft);
+    border-radius:0 8px 8px 0;
+    padding:14px 18px;
+    font-size:14.5px;
+    color:var(--ink);
+  }
+  .callout b{color:var(--accent-ink);}
+
+  footer.note{
+    margin-top:64px;
+    padding-top:20px;
+    border-top:1px solid var(--line);
+    color:var(--ink-dim);
+    font-size:13px;
+  }
+
+  a{color:var(--ref);}
+  a:focus-visible, button:focus-visible{outline:2px solid var(--accent);outline-offset:2px;}
+
+  @media print{
+    body{background:#fff;color:#000;}
+    .page{max-width:100%;padding:0;}
+    .card,.tier,.table-wrap{border-color:#ccc;}
+    thead th{position:static;}
+    section{margin:34px 0;page-break-inside:avoid;}
+    .chip{print-color-adjust:exact;-webkit-print-color-adjust:exact;}
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <header class="hero">
+    <p class="eyebrow">網頁設計乙級 · 術科自學路線圖</p>
+    <h1>從老師寫好的 102202，讀到你要考的 102203「ABC 影城」</h1>
+    <p class="lede">
+      這份文件回答三件事：這個資料夾裡的專案是什麼、試題本第 56–70 頁（17300-102203，四份題目中的第三題）從頭到尾在要求什麼、
+      以及你該先印哪些頁、先讀哪些程式碼。可以直接列印，重點都用色塊標好了。
+    </p>
+  </header>
+
+  <section id="legend">
+    <div class="sec-head"><h2>圖例</h2></div>
+    <div class="legend">
+      <span><span class="chip chip-new">🟠 新概念</span>102203 獨有，要花時間搞懂</span>
+      <span><span class="chip chip-skip">⚪ 重複略過</span>跟 102202 幾乎一樣，直接沿用寫法</span>
+      <span><span class="chip chip-ref">🔵 參考即可</span>順手看過、不是這題重點</span>
+    </div>
+  </section>
+
+  <section id="orient">
+    <div class="sec-head"><span class="sec-num">A</span><h2>先搞懂現況：這是兩份不同的題目</h2></div>
+    <p>
+      資料夾裡現成的 <code class="path">front / back / api / css / js / 102202</code>，是老師已經完整做出來的
+      <b>17300-102202「健康促進網社群平台」</b>參考解答——從 git 紀錄可以看到它是一步步蓋起來的：註冊、登入、
+      忘記密碼、瀏覽人次、後台選單、帳號與文章管理、分類網誌頁籤、人氣文章按讚，最後是問卷投票。
+    </p>
+    <p>
+      你現在要準備的，是試題本第 56–70 頁的 <b>17300-102203「ABC 影城」</b>——四份官方題目（102201～102204）裡的
+      第三題，跟 102202 是「同一套出題格式、不同情境」的姊妹題：一樣要建網站資料夾、一樣有標題區／主選單／動態廣告／
+      頁尾／後台管理，只是把「文章與問卷」換成了「電影、預告片與訂票」。
+    </p>
+    <div class="callout">
+      <b>學習策略：</b>不要把 102202 從頭讀到尾。把它當「工法字典」——規格書裡重複出現的部分，直接照抄老師的寫法；
+      真正該花時間的，是 102203 才有、102202 裡完全找不到對應寫法的新功能。
+    </div>
+  </section>
+
+  <section id="phases">
+    <div class="sec-head"><span class="sec-num">B</span><h2>學習進度總覽</h2></div>
+    <div class="phase">
+      <div class="phase-tag"><b>PHASE 0</b>約 0.5 天</div>
+      <div>
+        <p class="phase-title">環境暖身：先讓老師的專案跑起來</p>
+        <p class="phase-body">用 XAMPP 把 <code class="path">db19.sql</code> 匯入、跑起 102202 前台後台，
+          自己登入一次、投一次票、看一次後台管理。<b>目的不是複習 102202 的功能，而是確認你有能力「讀」接下來的程式碼</b>——
+          看得懂資料庫欄位對應到哪支 API、哪支 API 又被哪個頁面呼叫。</p>
+      </div>
+    </div>
+    <div class="phase">
+      <div class="phase-tag"><b>PHASE 1</b>約 1 天</div>
+      <div>
+        <p class="phase-title">對照下面的「程式碼地圖」，讀懂老師的共用工法</p>
+        <p class="phase-body">照著 <b>C 節</b>的表格，一行一行對照「規格概念 → 檔案」，弄懂：登入驗證怎麼寫、
+          後台選單框架怎麼搭、分頁邏輯怎麼算、AJAX 怎麼跟 API 溝通。這些工法在 102203 幾乎原封不動可以用。</p>
+      </div>
+    </div>
+    <div class="phase">
+      <div class="phase-tag"><b>PHASE 2</b>約 0.5 天</div>
+      <div>
+        <p class="phase-title">快速核對 102203 裡「重複」的段落</p>
+        <p class="phase-body">只需對照動作要求 (一)(二)(三)(十)——建資料夾、版面尺寸、伺服器、主選單、資料備份，
+          確認寫法跟 102202 一致即可，<b>不用重新學，直接複製既有寫法改名字</b>。</p>
+      </div>
+    </div>
+    <div class="phase">
+      <div class="phase-tag"><b>PHASE 3</b>約 3–4 天</div>
+      <div>
+        <p class="phase-title">攻克 102203 專屬功能（重點都在這裡）</p>
+        <p class="phase-body">建議順序：① 先設計資料庫（電影／場次／座位／訂單）② 預告片海報輪播
+          ③ 院線片清單＋簡介頁 ④ <b>線上訂票完整流程（最複雜，留最多天數）</b> ⑤ 後台五大管理模組。
+          每完成一塊，回頭對照評審表的扣分項目自我檢查一次。</p>
+      </div>
+    </div>
+    <div class="phase">
+      <div class="phase-tag"><b>PHASE 4</b>1 天起</div>
+      <div>
+        <p class="phase-title">整合＋限時模擬考</p>
+        <p class="phase-body">用題本規定的 240 分鐘跑一次完整流程，包含備份步驟；結束後拿評審表逐項打勾，
+          找出還缺哪個「＊」或「★」小項。</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="map">
+    <div class="sec-head"><span class="sec-num">C</span><h2>老師的 102202 專案地圖</h2></div>
+    <p>依規格概念找到對應檔案，弄懂寫法後再看能不能原封不動搬到 102203。</p>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>規格概念</th><th>檔案位置</th><th>在 102203 可以怎麼用</th><th>標記</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>API 共用連線</td><td><code class="path">api/db.php</code></td><td>每支 API 都會 include，102203 一樣先寫一份</td><td><span class="chip chip-skip">⚪</span></td></tr>
+          <tr><td>會員註冊＋帳號重複檢查</td><td><code class="path">front/reg.php</code><br><code class="path">api/reg.php</code><br><code class="path">api/chk_acc.php</code></td><td>「會員系統」的註冊流程直接沿用</td><td><span class="chip chip-skip">⚪</span></td></tr>
+          <tr><td>會員登入</td><td><code class="path">front/login.php</code><br><code class="path">api/chk_pw.php</code></td><td>「線上訂票」判斷會員身份、進入結帳前的登入檢查，同一套邏輯</td><td><span class="chip chip-skip">⚪</span></td></tr>
+          <tr><td>忘記密碼</td><td><code class="path">front/forgot.php</code></td><td>102203 題本沒有這個功能，可以不看</td><td><span class="chip chip-ref">🔵</span></td></tr>
+          <tr><td>登出</td><td><code class="path">api/logout.php</code></td><td>通用登出模式，直接套</td><td><span class="chip chip-skip">⚪</span></td></tr>
+          <tr><td>首頁外框（標題／主選單／動態廣告）</td><td><code class="path">front/main.php</code><br><code class="path">css/css.css</code></td><td>對照 102203「網站首頁版型」，外框結構幾乎一樣</td><td><span class="chip chip-skip">⚪</span></td></tr>
+          <tr><td>分類頁籤切換（AJAX 換內容）</td><td><code class="path">front/po.php</code></td><td>102203 沒有頁籤，但「點一下、不刷新頁面換內容」的手法可參考</td><td><span class="chip chip-ref">🔵</span></td></tr>
+          <tr><td>列表＋分頁（超過 N 筆換頁）</td><td><code class="path">front/news.php</code><br><code class="path">api/get_posts.php</code></td><td><b>「院線片清單區」2×2、超過 4 部分頁</b>直接套用同一套分頁參數寫法</td><td><span class="chip chip-new">🟠</span></td></tr>
+          <tr><td>用 ID 撈單筆詳細內容</td><td><code class="path">api/get_post.php</code></td><td>「院線片簡介」點海報／劇情簡介切入詳細頁，同樣是「撈單筆資料」模式</td><td><span class="chip chip-skip">⚪</span></td></tr>
+          <tr><td>滑鼠移過彈出視窗</td><td><code class="path">front/pop.php</code></td><td>102203 沒有這個需求，可以不看</td><td><span class="chip chip-ref">🔵</span></td></tr>
+          <tr><td>按讚計數</td><td><code class="path">api/good.php</code></td><td>102203 沒有按讚，可以不看</td><td><span class="chip chip-ref">🔵</span></td></tr>
+          <tr><td>問卷列表／投票／結果統計</td><td><code class="path">front/que.php</code>, <code class="path">vote.php</code>, <code class="path">result.php</code><br><code class="path">api/vote.php</code>, <code class="path">add_que.php</code></td><td><b>跟「線上訂票」資料流最像的一段</b>——選項→送出→寫入資料表→統計呈現，訂票的「選場次→選位→送出訂單」可以照抄這條資料流</td><td><span class="chip chip-new">🟠</span></td></tr>
+          <tr><td>後台選單框架</td><td><code class="path">back/main.php</code></td><td>102203 後台 5 大管理項目的外框，直接套</td><td><span class="chip chip-skip">⚪</span></td></tr>
+          <tr><td>後台帳號管理</td><td><code class="path">back/acc.php</code><br><code class="path">api/edit_acc.php</code></td><td>102203 沒有多管理員權限設計，可以不看</td><td><span class="chip chip-ref">🔵</span></td></tr>
+          <tr><td>後台列表 CRUD＋分頁</td><td><code class="path">back/news.php</code><br><code class="path">api/edit_news.php</code></td><td><b>「後台院線片清單管理」「後台預告片管理」「後台訂單管理」</b>的新增／修改／刪除／分頁都套這一套</td><td><span class="chip chip-new">🟠</span></td></tr>
+          <tr><td>後台問卷管理</td><td><code class="path">back/que.php</code><br><code class="path">api/add_que.php</code></td><td>102203 沒有對應功能，可以不看</td><td><span class="chip chip-ref">🔵</span></td></tr>
+          <tr><td>資料庫設計習慣</td><td><code class="path">db19.sql</code></td><td>102203 要重新設計電影／場次／座位／訂單表，但建表與外鍵的寫法習慣可以照抄</td><td><span class="chip chip-skip">⚪</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="outline">
+    <div class="sec-head"><span class="sec-num">D</span><h2>102203 試題本逐段大綱（從頭到尾）</h2></div>
+    <p>依題本原本的順序列出，頁碼是題本自己印的頁碼；照這個順序讀，不用跳著找。</p>
+    <ol class="outline">
+      <li>
+        <div class="outline-head"><span class="outline-title">所需檔案清單</span><span class="outline-page">p.54</span><span class="chip chip-ref">🔵</span></div>
+        <p class="outline-body">預告片、電影海報、分級圖示、訂票座位圖、院線片影片檔、3 種版型檔、共用函式庫。掃過去記住檔名代碼（03A/03B/03C/03D）就好。</p>
+      </li>
+      <li>
+        <div class="outline-head"><span class="outline-title">試題說明一～七</span><span class="outline-page">p.54–55</span><span class="chip chip-skip">⚪</span></div>
+        <p class="outline-body">資料夾結構、軟體安裝規定、須自行完成項目、評分方式、錯字扣分、評分標準——<b>四份題本一字不差</b>，讀懂一次就不用每題重讀。</p>
+      </li>
+      <li>
+        <div class="outline-head"><span class="outline-title">動作要求 (一) 建資料夾、版面尺寸、伺服器</span><span class="outline-page">p.55</span><span class="chip chip-skip">⚪</span></div>
+        <p class="outline-body"><code class="path">webXX</code>／<code class="path">dbXX</code> 命名、1024×768、上下左右留 10px、本機 Web／DB 伺服器要能跑——跟 102202 完全一樣的四小項。</p>
+      </li>
+      <li>
+        <div class="outline-head"><span class="outline-title">動作要求 (二) 網站架構與版型</span><span class="outline-page">p.55–58 · 圖1–7</span><span class="chip chip-new">🟠</span></div>
+        <p class="outline-body">架構圖＋首頁版型（標題／主選單／動態廣告／<b>預告片導覽區</b>／院線片清單區／頁尾）沿用舊概念；但多了一種全新的
+          <b>「院線片簡介」版型</b>，後台管理選單也要記熟 5 個項目名稱（網站標題／動態文字／預告片海報／院線片／電影訂票管理）。</p>
+      </li>
+      <li>
+        <div class="outline-head"><span class="outline-title">動作要求 (三) 主選單區</span><span class="outline-page">p.58–59 · 圖8</span><span class="chip chip-skip">⚪</span></div>
+        <p class="outline-body">首頁／線上訂票／會員系統／管理系統四個連結，管理系統預設帳密 <span class="mono">admin / 1234</span>——跟 102202 進後台的判斷邏輯一樣。</p>
+      </li>
+      <li>
+        <div class="outline-head"><span class="outline-title">動作要求 (四) 預告片海報導覽區</span><span class="outline-page">p.60–61 · 圖9–10</span><span class="chip chip-new">🟠 重點</span></div>
+        <p class="outline-body">動畫輪播、按鈕列最多顯示 4 個、超過用「◀ ▶」捲動、至少 6 張海報、切換要有轉場效果（淡入／縮放／滑出擇一實作）。
+          <b>102202 完全沒有對應功能，是這題最需要額外練的前端動畫。</b></p>
+      </li>
+      <li>
+        <div class="outline-head"><span class="outline-title">動作要求 (五) 後台預告片海報管理</span><span class="outline-page">p.61 · 圖11</span><span class="chip chip-new">🟠</span></div>
+        <p class="outline-body">新增／刪除／設定是否播放／設定播放順序／設定轉場效果——CRUD 部分可參考後台文章管理的寫法，但多了「排序」跟「效果設定」兩個新欄位。</p>
+      </li>
+      <li>
+        <div class="outline-head"><span class="outline-title">動作要求 (六) 院線片清單區</span><span class="outline-page">p.62–63 · 圖12–14</span><span class="chip chip-new">🟠 重點</span></div>
+        <p class="outline-body">上映檔期＝上映日起 3 天、2×2 排版一頁 4 部、超過分頁、<b>自動過濾已下檔電影</b>、點「線上訂票」要帶入所選電影、
+          點海報／劇情簡介進入院線片簡介頁（含預告片播放）。分頁排版可抄最新文章分頁，但「日期區間自動過濾」是新邏輯，要特別注意。</p>
+      </li>
+      <li>
+        <div class="outline-head"><span class="outline-title">動作要求 (七) 後台院線片清單管理</span><span class="outline-page">p.63–64 · 圖15–16</span><span class="chip chip-new">🟠</span></div>
+        <p class="outline-body">新增電影要填片名／分級下拉／片長／上映日期（年月日三欄）／發行商／導演／預告影片／海報／簡介；還要能修改、刪除、上下架、排序。
+          CRUD 工法重複，但欄位多、有影片＋圖片兩種檔案上傳，要留意表單設計。</p>
+      </li>
+      <li>
+        <div class="outline-head"><span class="outline-title">動作要求 (八) 前台線上訂票功能</span><span class="outline-page">p.64–67 · 圖17–20</span><span class="chip chip-new">🟠🟠 全題最重</span></div>
+        <p class="outline-body">電影／日期／場次三層連動下拉、5 個場次時段各自算剩餘座位（20 席扣已訂）、挑選座位 4×5 矩陣（已售／未售圖示、最多勾 4 個）、
+          訂單編號規則（8 碼日期＋4 碼流水號）、產生訂單頁面。<b>這是全題唯一沒有前例可抄的完整新流程，練習時間要最多留給它。</b></p>
+      </li>
+      <li>
+        <div class="outline-head"><span class="outline-title">動作要求 (九) 後台電影票訂單管理</span><span class="outline-page">p.67 · 圖21</span><span class="chip chip-new">🟠</span></div>
+        <p class="outline-body">訂單列表（編號／片名／日期／場次／數量／位置）、單筆刪除、依電影快速刪除、依日期快速刪除（皆需確認視窗）——列表與刪除工法可參考後台文章管理。</p>
+      </li>
+      <li>
+        <div class="outline-head"><span class="outline-title">動作要求 (十) 資料備份</span><span class="outline-page">p.68</span><span class="chip chip-skip">⚪</span></div>
+        <p class="outline-body"><code class="path">webXX</code> 主文件目錄、6 支 xampp 環境設定檔、資料庫、PHP／ASP.NET 兩種備份清單——<b>跟其他三份題本一字不差</b>，考前把備份流程背一次，不用每題重讀。</p>
+      </li>
+    </ol>
+  </section>
+
+  <section id="print">
+    <div class="sec-head"><span class="sec-num">E</span><h2>優先列印／閱讀清單</h2></div>
+    <div class="tier">
+      <h3><span class="chip chip-new">TIER 1</span>一定要印、反覆讀</h3>
+      <p>動作要求 (四)(六)(八)(九) 全文＋圖 9–21（p.60–67）——這是本題唯一的新內容，值得整頁列印、旁邊留白寫筆記。</p>
+      <ul>
+        <li><b>預告片海報導覽區</b>（p.60–61）</li>
+        <li><b>院線片清單區</b>（p.62–63）</li>
+        <li><b>線上訂票功能</b>（p.64–67，全題最複雜）</li>
+        <li><b>後台電影票訂單管理</b>（p.67）</li>
+      </ul>
+    </div>
+    <div class="tier">
+      <h3><span class="chip chip-ref">TIER 2</span>印一次、理解後收起來</h3>
+      <p>動作要求 (二)(三)(五)(七) 含圖 1–8、15–16（p.55–61、63–64）——架構、版型、後台管理框架，理解一次即可，不用天天翻。</p>
+    </div>
+    <div class="tier">
+      <h3><span class="chip chip-skip">TIER 3</span>不用印，掃過確認一致即可</h3>
+      <p>試題說明一～七、動作要求 (一)(十)、所需檔案表（p.54–55、68）——跟 102201／102202／102204 完全共用的規則，102202 已經走過一次，直接沿用。</p>
+    </div>
+    <div class="callout">
+      <b>額外建議：</b>把 102202 題本第 37–53 頁（你手上已有現成程式碼的題目）跟 102203 題本擺在一起對照著讀，
+      尤其是「問卷投票」對「電影訂票」那兩段——選項→送出→寫入資料表→統計呈現，跟選場次→選位→送出訂單，資料流幾乎同構，
+      單獨啃 102203 很容易卡住，對照著看會快很多。
+    </div>
+  </section>
+
+  <footer class="note">
+    頁碼依試題本原印頁碼標示；你的 PDF 檢視器顯示的頁碼可能有 1–2 頁偏移，對照小節標題（動作要求幾）會比對頁碼準。
+  </footer>
+
+</div>
+</body>
+</html>
