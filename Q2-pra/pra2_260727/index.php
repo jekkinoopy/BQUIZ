@@ -21,10 +21,10 @@
 	<div id="all">
 		<div id="title">
 			00 月 00 號 Tuesday | 今日瀏覽: 1 | 累積瀏覽: 36
-			<a href="index.html" style="float: right;">回首頁</a>
+			<a href="index.php" style="float: right;">回首頁</a>
 		</div>
 		<div id="title2">
-			<a href="index.html"><img src="./icon/02B01.jpg" alt="健康促進網-回首頁" title="健康促進網-回首頁"></a>
+			<a href="index.php"><img src="./icon/02B01.jpg" alt="健康促進網-回首頁" title="健康促進網-回首頁"></a>
 		</div>
 		<div id="mm">
 			<div class="hal" id="lef">
@@ -41,7 +41,16 @@
 					<a href="?do=login">會員登入</a>
 				</span>
 				<div class="">
+					<?php
+						$do=$_GET['do']??'main';
+						$file="./front/$do.php";
 
+						if(file_exists($file)){
+							include $file;
+						}else{
+							include "./front/main.php";
+						}
+					?>
 				</div>
 			</div>
 		</div>
