@@ -17,13 +17,13 @@
             <td><input type="password" id="pw2" name="pw2"></td>	</tr>
         <tr>
             <td>Step4:信箱(忘記密碼時使用)</td>
-            <td><input type="email" id="email" name="email"></td>	
+            <td><input type="text" id="email" name="email"></td>	
         </tr>
         <tr>
             <td>
                 <button type="button">註冊</button>
                 <button type="button" 
-                        onclick="$('#acc', '#pw','#pw2','#email').val('')">清除
+                        onclick="$('#acc, #pw,#pw2,#email').val('')">清除
                 </button>
             </td>   
             <td></td>
