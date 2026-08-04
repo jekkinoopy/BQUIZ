@@ -17,17 +17,35 @@
             <td><input type="password" id="pw2" name="pw2"></td>	</tr>
         <tr>
             <td>Step4:信箱(忘記密碼時使用)</td>
-            <td><input type="text" id="email" name="email"></td>	
+            <td><input type="text" id="email" name="email"></td>
         </tr>
         <tr>
             <td>
-                <button type="button">註冊</button>
-                <button type="button" 
+                <button type="button" onclick="reg()">註冊</button>
+                <button type="button"
                         onclick="$('#acc, #pw,#pw2,#email').val('')">清除
                 </button>
-            </td>   
+            </td>
             <td></td>
         </tr>
     </table>
-                
+
 </fieldset>
+<script>
+
+ function reg(){
+	let user={
+		'acc'="$("#acc").val(),
+		'pw'="$("#pw").val(),
+		'pw2'="$("#pw2").val(),
+		'email'="$("#email").val()
+	}
+	if(user.acc=="" || user.pw=="" || user.pw2=="" ||email=="" ){
+		alert("不可空白");
+	}else if(user.pw != user.pw2){
+		alert("密碼錯誤");
+	}else{
+		console.log('檢查帳號')
+	}
+ }
+</script>
