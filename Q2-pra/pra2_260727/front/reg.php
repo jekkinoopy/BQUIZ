@@ -35,12 +35,12 @@
 
  function reg(){
 	let user={
-		'acc'="$("#acc").val(),
-		'pw'="$("#pw").val(),
-		'pw2'="$("#pw2").val(),
-		'email'="$("#email").val()
+		'acc':$("#acc").val(),
+		'pw':$("#pw").val(),
+		'pw2':$("#pw2").val(),
+		'email':$("#email").val()
 	}
-	if(user.acc=="" || user.pw=="" || user.pw2=="" ||email=="" ){
+	if(user.acc=="" || user.pw=="" || user.pw2=="" ||user.email=="" ){
 		alert("不可空白");
 	}else if(user.pw != user.pw2){
 		alert("密碼錯誤");
